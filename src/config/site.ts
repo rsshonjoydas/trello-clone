@@ -10,9 +10,8 @@ export type SiteConfig = {
 };
 
 export const siteConfig: SiteConfig = {
-  name: 'RS Shonjoy',
-  description:
-    'An open source application built using the new router, server components and everything new in Next.js 13.',
+  name: 'Taskify',
+  description: 'Collaborate, manage projects, and reach new productivity peaks',
   url: `${process.env.NEXT_PUBLIC_APP_URL}`,
   ogImage: 'https://redolence.com/og.jpg',
   links: {
