@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import * as React from 'react';
 
 import { siteConfig } from '@/config/site';
-import { absoluteUrl, cn } from '@/lib/utils';
+import { absoluteUrl } from '@/lib/utils';
 
 import '@/styles/index.scss';
 
@@ -58,12 +58,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body
-        suppressHydrationWarning
-        className={cn('min-h-screen bg-secondary font-sans antialiased', inter.className)}
-      >
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

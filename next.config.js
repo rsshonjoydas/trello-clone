@@ -2,9 +2,17 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    sassOptions: {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'img.clerk.com',
+      },
+    ],
+  },
+  sassOptions: {
     includePaths: [path.join(__dirname, 'src/styles')],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
