@@ -1,6 +1,8 @@
 'use client';
 
 import { X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { ElementRef, useRef } from 'react';
 import { toast } from 'sonner';
 
 import { createBoard } from '@/actions/create-board';
@@ -9,6 +11,7 @@ import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from '@/compone
 import { useAction } from '@/hooks/use-action';
 
 import { FormInput } from './form-input';
+import { FormPicker } from './form-picker';
 import { FormSubmit } from './form-submit';
 
 interface FormPopoverProps {
@@ -24,28 +27,32 @@ export const FormPopover = ({
   align,
   sideOffset = 0,
 }: FormPopoverProps) => {
+  const router = useRouter();
+  const closeRef = useRef<ElementRef<'button'>>(null);
+
   const { execute, fieldErrors } = useAction(createBoard, {
     onSuccess: (data) => {
-      console.log({ data });
       toast.success('Board created!');
+      closeRef.current?.click();
+      router.push(`/board/${data.id}`);
     },
     onError: (error) => {
-      console.log(error);
       toast.error(error);
     },
   });
 
-  const onSubmit = (FormData: FormData) => {
-    const title = FormData.get('title') as string;
+  const onSubmit = (formData: FormData) => {
+    const title = formData.get('title') as string;
+    const image = formData.get('image') as string;
 
-    execute({ title });
+    execute({ title, image });
   };
   return (
     <Popover>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent align={align} className='w-80 pt-3' side={side} sideOffset={sideOffset}>
         <div className='pb-4 text-center text-sm font-medium text-neutral-600'>Create Board</div>
-        <PopoverClose asChild>
+        <PopoverClose ref={closeRef} asChild>
           <Button
             variant='ghost'
             className='absolute right-2 top-2 h-auto w-auto p-2 text-neutral-600 focus-visible:ring-0 focus-visible:ring-offset-0'
@@ -55,6 +62,7 @@ export const FormPopover = ({
         </PopoverClose>
         <form action={onSubmit} className='space-y-4'>
           <div className='space-y-4'>
+            <FormPicker id='image' errors={fieldErrors} />
             <FormInput id='title' label='Board title' type='text' errors={fieldErrors} />
           </div>
           <FormSubmit className='w-full'>Create</FormSubmit>
