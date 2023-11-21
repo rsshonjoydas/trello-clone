@@ -4,12 +4,14 @@
 
 import { List } from '@prisma/client';
 import { ElementRef, useRef, useState } from 'react';
+import { toast } from 'sonner';
 import { useEventListener } from 'usehooks-ts';
 
 import { updateList } from '@/actions/update-list';
 import { FormInput } from '@/components/form/form-input';
 import { useAction } from '@/hooks/use-action';
-import { toast } from 'sonner';
+
+import { ListOptions } from './list-options';
 
 interface ListHeaderProps {
   data: List;
@@ -97,6 +99,7 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
           {title}
         </div>
       )}
+      <ListOptions onAddCard={() => {}} data={data} />
     </div>
   );
 };
