@@ -73,6 +73,7 @@ export const ListOptions = ({ data, onAddCard }: ListOptionsProps) => {
           </Button>
         </PopoverClose>
         <Button
+          onClick={onAddCard}
           variant='ghost'
           className='h-auto w-full justify-start rounded-none p-2 px-5 text-sm font-normal'
         >
