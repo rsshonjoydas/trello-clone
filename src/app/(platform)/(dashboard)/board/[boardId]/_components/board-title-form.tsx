@@ -46,7 +46,11 @@ export const BoardTitleForm = ({ data }: BoardTitleFormProps) => {
   const onSubmit = (formData: FormData) => {
     const newTitle = formData.get('title') as string;
 
-    execute({
+    if (newTitle === data.title) {
+      return disableEditing();
+    }
+
+    return execute({
       title: newTitle,
       id: data.id,
     });
