@@ -38,6 +38,7 @@
     "react-dom": "^18",
     "sass": "^1.69.5",
     "sonner": "^1.2.0",
+    "stripe": "^14.5.0",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
     "unsplash-js": "^7.0.18",
